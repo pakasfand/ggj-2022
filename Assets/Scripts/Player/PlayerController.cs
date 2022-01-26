@@ -3,8 +3,11 @@
 namespace Player
 {
 	[RequireComponent (typeof (Controller2D))]
-	public class PlayerController : MonoBehaviour {
-
+	public class PlayerController : MonoBehaviour
+	{
+		[SerializeField] private Animator _animator;
+		[SerializeField] private SpriteRenderer _spriteRenderer; 
+		
 		public float maxJumpHeight = 4;
 		public float minJumpHeight = 1;
 		public float timeToJumpApex = .4f;
@@ -52,6 +55,24 @@ namespace Player
 				} else {
 					velocity.y = 0;
 				}
+			}
+
+			HandleRendering();
+		}
+
+		private void HandleRendering()
+		{
+			_spriteRenderer.flipX = directionalInput.x < 0;
+			if (controller.collisions.below)
+			{
+				_animator.SetBool("isJumping", false);
+				_animator.SetBool("isFalling", false);
+				_animator.SetFloat("Speed", Mathf.Abs(velocity.x));
+			}
+			else
+			{
+				_animator.SetBool("isJumping", velocity.y > 0);
+				_animator.SetBool("isFalling", velocity.y < 0);
 			}
 		}
 
@@ -124,7 +145,8 @@ namespace Player
 
 		void CalculateVelocity() {
 			float targetVelocityX = directionalInput.x * moveSpeed;
-			velocity.x = Mathf.SmoothDamp (velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below)?accelerationTimeGrounded:accelerationTimeAirborne);
+			velocity.x = Mathf.SmoothDamp (velocity.x, targetVelocityX, ref velocityXSmoothing, 
+				(controller.collisions.below)?accelerationTimeGrounded:accelerationTimeAirborne);
 			velocity.y += gravity * Time.deltaTime;
 		}
 	}
