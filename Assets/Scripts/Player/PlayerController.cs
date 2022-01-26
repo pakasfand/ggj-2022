@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Player
 {
@@ -34,6 +35,8 @@ namespace Player
 		Vector2 directionalInput;
 		bool wallSliding;
 		int wallDirX;
+
+		public static Action OnPlayerJump;
 
 		void Start() {
 			controller = GetComponent<Controller2D> ();
@@ -80,8 +83,11 @@ namespace Player
 			directionalInput = input;
 		}
 
-		public void OnJumpInputDown() {
+		public void OnJumpInputDown() 
+		{
 			if (wallSliding) {
+				OnPlayerJump?.Invoke();
+
 				if (wallDirX == directionalInput.x) {
 					velocity.x = -wallDirX * wallJumpClimb.x;
 					velocity.y = wallJumpClimb.y;
@@ -96,6 +102,8 @@ namespace Player
 				}
 			}
 			if (controller.collisions.below) {
+				OnPlayerJump?.Invoke();
+
 				if (controller.collisions.slidingDownMaxSlope) {
 					if (directionalInput.x != -Mathf.Sign (controller.collisions.slopeNormal.x)) { // not jumping against max slope
 						velocity.y = maxJumpVelocity * controller.collisions.slopeNormal.y;
