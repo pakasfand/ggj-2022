@@ -37,8 +37,9 @@ namespace Player
 		int wallDirX;
 
 		public static Action OnPlayerJump;
+		public static Action OnPlayerFootStep;
 
-		void Start() {
+		private void Start() {
 			controller = GetComponent<Controller2D> ();
 
 			gravity = -(2 * maxJumpHeight) / Mathf.Pow (timeToJumpApex, 2);
@@ -46,7 +47,7 @@ namespace Player
 			minJumpVelocity = Mathf.Sqrt (2 * Mathf.Abs (gravity) * minJumpHeight);
 		}
 
-		void Update() {
+		private void Update() {
 			CalculateVelocity ();
 			HandleWallSliding ();
 
@@ -122,7 +123,7 @@ namespace Player
 		}
 		
 
-		void HandleWallSliding() {
+		private void HandleWallSliding() {
 			wallDirX = (controller.collisions.left) ? -1 : 1;
 			wallSliding = false;
 			if ((controller.collisions.left || controller.collisions.right) && !controller.collisions.below && velocity.y < 0) {
@@ -151,11 +152,13 @@ namespace Player
 
 		}
 
-		void CalculateVelocity() {
+		private void CalculateVelocity() {
 			float targetVelocityX = directionalInput.x * moveSpeed;
 			velocity.x = Mathf.SmoothDamp (velocity.x, targetVelocityX, ref velocityXSmoothing, 
 				(controller.collisions.below)?accelerationTimeGrounded:accelerationTimeAirborne);
 			velocity.y += gravity * Time.deltaTime;
 		}
+
+		public void OnFootStep() => OnPlayerFootStep?.Invoke();
 	}
 }
