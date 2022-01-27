@@ -169,7 +169,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collisionMask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 256
   horizontalRayCount: 0
   verticalRayCount: 0
   horizontalRaySpacing: 0
@@ -189,17 +189,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2ccf745a39e5eb4ca4472f451d75556, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _maxJumpHeight: 4
+  _minJumpHeight: 1
+  _timeToJumpApex: 0.4
+  _wallJumpClimb: {x: 7.5, y: 16}
+  _wallJumpOff: {x: 8.5, y: 7}
+  _wallLeap: {x: 18, y: 17}
+  _wallSlideSpeedMax: 3
+  _wallStickTime: 0.25
+  _ascendGravity: 3
+  _descendGravity: -1
   _animator: {fileID: 9164161504884759602}
   _spriteRenderer: {fileID: 7865229153658391132}
-  maxJumpHeight: 4
-  minJumpHeight: 1
-  timeToJumpApex: 0.4
-  wallJumpClimb: {x: 7.5, y: 16}
-  wallJumpOff: {x: 8.5, y: 7}
-  wallLeap: {x: 18, y: 17}
-  wallSlideSpeedMax: 3
-  wallStickTime: 0.25
-  gravity: 0
 --- !u!114 &3133354638339775164
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -265,7 +266,7 @@ MonoBehaviour:
   m_LightCookieSprite: {fileID: 0}
   m_UseNormalMap: 0
   m_LightOrder: 0
-  m_AlphaBlendOnOverlap: 0
+  m_AlphaBlendOnOverlap: 1
   m_ShadowIntensity: 0
   m_ShadowVolumeIntensity: 0
   m_PointLightInnerAngle: 360

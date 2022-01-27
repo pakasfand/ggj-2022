@@ -1,4 +1,5 @@
 ﻿using System;
+using Misc;
 using UnityEngine;
 
 namespace Player
@@ -6,58 +7,84 @@ namespace Player
 	[RequireComponent (typeof (Controller2D))]
 	public class PlayerController : MonoBehaviour
 	{
-		[SerializeField] private Animator _animator;
-		[SerializeField] private SpriteRenderer _spriteRenderer; 
+		[Header("Jumping")]
+		[SerializeField] private float _maxJumpHeight = 4;
+		[SerializeField] private float _minJumpHeight = 1;
+		[SerializeField] private float _timeToJumpApex = .4f;
+		private float _accelerationTimeAirborne = .2f;
+		private float _accelerationTimeGrounded = .1f;
+		private float _moveSpeed = 6;
+		private float _gravity;
+		private float _normalGravity;
+		private float _maxJumpVelocity;
+		private float _minJumpVelocity;
 		
-		public float maxJumpHeight = 4;
-		public float minJumpHeight = 1;
-		public float timeToJumpApex = .4f;
-		float accelerationTimeAirborne = .2f;
-		float accelerationTimeGrounded = .1f;
-		float moveSpeed = 6;
+		[Header("Wall Jumping")]
+		[SerializeField] private Vector2 _wallJumpClimb;
+		[SerializeField] private Vector2 _wallJumpOff;
+		[SerializeField] private Vector2 _wallLeap;
+		
+		[Header("Wall Sliding")]
+		[SerializeField] private float _wallSlideSpeedMax = 3;
+		[SerializeField] private float _wallStickTime = .25f;
+		private float _timeToWallUnstick;
+		private bool _wallSliding;
+		private int _wallDirX;
+		
+		[Header("Ascending")]
+		[SerializeField] private float _ascendGravity;
+		private bool _isAscending;
+		
+		[Header("Descending")]
+		[SerializeField] private float _descendGravity;
+		private bool _isDescending;
+		
+		[Header("Rendering")]
+		[SerializeField] private Animator _animator;
+		[SerializeField] private SpriteRenderer _spriteRenderer;
+		
+		private Vector3 _velocity;
+		private float _velocityXSmoothing;
 
-		public Vector2 wallJumpClimb;
-		public Vector2 wallJumpOff;
-		public Vector2 wallLeap;
+		private Controller2D _controller;
 
-		public float wallSlideSpeedMax = 3;
-		public float wallStickTime = .25f;
-		float timeToWallUnstick;
-
-		public float gravity;
-		float maxJumpVelocity;
-		float minJumpVelocity;
-		Vector3 velocity;
-		float velocityXSmoothing;
-
-		Controller2D controller;
-
-		Vector2 directionalInput;
-		bool wallSliding;
-		int wallDirX;
-
+		private Vector2 _directionalInput;
+		
 		public static Action OnPlayerJump;
 		public static Action OnPlayerFootStep;
 
-		private void Start() {
-			controller = GetComponent<Controller2D> ();
+		private void OnEnable()
+		{
+			AscendZone.OnPlayerEntered += OnPlayerEnteredAscend;
+			AscendZone.OnPlayerExited += OnPlayerExitedAscend;
+		}
 
-			gravity = -(2 * maxJumpHeight) / Mathf.Pow (timeToJumpApex, 2);
-			maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
-			minJumpVelocity = Mathf.Sqrt (2 * Mathf.Abs (gravity) * minJumpHeight);
+		private void OnDisable()
+		{
+			AscendZone.OnPlayerEntered -= OnPlayerEnteredAscend;
+			AscendZone.OnPlayerExited -= OnPlayerExitedAscend;
+		}
+
+		private void Start() {
+			_controller = GetComponent<Controller2D> ();
+
+			_normalGravity = -(2 * _maxJumpHeight) / Mathf.Pow (_timeToJumpApex, 2);
+			_gravity = _normalGravity;
+			_maxJumpVelocity = Mathf.Abs(_gravity) * _timeToJumpApex;
+			_minJumpVelocity = Mathf.Sqrt (2 * Mathf.Abs (_gravity) * _minJumpHeight);
 		}
 
 		private void Update() {
 			CalculateVelocity ();
 			HandleWallSliding ();
 
-			controller.Move (velocity * Time.deltaTime, directionalInput);
+			_controller.Move (_velocity * Time.deltaTime, _directionalInput);
 
-			if (controller.collisions.above || controller.collisions.below) {
-				if (controller.collisions.slidingDownMaxSlope) {
-					velocity.y += controller.collisions.slopeNormal.y * -gravity * Time.deltaTime;
+			if (_controller.collisions.above || _controller.collisions.below) {
+				if (_controller.collisions.slidingDownMaxSlope) {
+					_velocity.y += _controller.collisions.slopeNormal.y * -_gravity * Time.deltaTime;
 				} else {
-					velocity.y = 0;
+					_velocity.y = 0;
 				}
 			}
 
@@ -66,99 +93,126 @@ namespace Player
 
 		private void HandleRendering()
 		{
-			_spriteRenderer.flipX = directionalInput.x < 0;
-			if (controller.collisions.below)
+			_spriteRenderer.flipX = _directionalInput.x < 0;
+			if (_controller.collisions.below)
 			{
 				_animator.SetBool("isJumping", false);
 				_animator.SetBool("isFalling", false);
-				_animator.SetFloat("Speed", Mathf.Abs(velocity.x));
+				_animator.SetFloat("Speed", Mathf.Abs(_velocity.x));
 			}
 			else
 			{
-				_animator.SetBool("isJumping", velocity.y > 0);
-				_animator.SetBool("isFalling", velocity.y < 0);
+				_animator.SetBool("isJumping", _velocity.y > 0);
+				_animator.SetBool("isFalling", _velocity.y < 0);
 			}
 		}
 
 		public void SetDirectionalInput (Vector2 input) {
-			directionalInput = input;
+			_directionalInput = input;
 		}
 
 		public void OnJumpInputDown() 
 		{
-			if (wallSliding) {
+			if (_wallSliding) {
 				OnPlayerJump?.Invoke();
 
-				if (wallDirX == directionalInput.x) {
-					velocity.x = -wallDirX * wallJumpClimb.x;
-					velocity.y = wallJumpClimb.y;
+				if (_wallDirX == _directionalInput.x) {
+					_velocity.x = -_wallDirX * _wallJumpClimb.x;
+					_velocity.y = _wallJumpClimb.y;
 				}
-				else if (directionalInput.x == 0) {
-					velocity.x = -wallDirX * wallJumpOff.x;
-					velocity.y = wallJumpOff.y;
+				else if (_directionalInput.x == 0) {
+					_velocity.x = -_wallDirX * _wallJumpOff.x;
+					_velocity.y = _wallJumpOff.y;
 				}
 				else {
-					velocity.x = -wallDirX * wallLeap.x;
-					velocity.y = wallLeap.y;
+					_velocity.x = -_wallDirX * _wallLeap.x;
+					_velocity.y = _wallLeap.y;
 				}
 			}
-			if (controller.collisions.below) {
+			if (_controller.collisions.below) {
 				OnPlayerJump?.Invoke();
 
-				if (controller.collisions.slidingDownMaxSlope) {
-					if (directionalInput.x != -Mathf.Sign (controller.collisions.slopeNormal.x)) { // not jumping against max slope
-						velocity.y = maxJumpVelocity * controller.collisions.slopeNormal.y;
-						velocity.x = maxJumpVelocity * controller.collisions.slopeNormal.x;
+				if (_controller.collisions.slidingDownMaxSlope) {
+					if (_directionalInput.x != -Mathf.Sign (_controller.collisions.slopeNormal.x)) { // not jumping against max slope
+						_velocity.y = _maxJumpVelocity * _controller.collisions.slopeNormal.y;
+						_velocity.x = _maxJumpVelocity * _controller.collisions.slopeNormal.x;
 					}
 				} else {
-					velocity.y = maxJumpVelocity;
+					_velocity.y = _maxJumpVelocity;
 				}
 			}
 		}
 
 		public void OnJumpInputUp() {
-			if (velocity.y > minJumpVelocity) {
-				velocity.y = minJumpVelocity;
+			if (_velocity.y > _minJumpVelocity) {
+				_velocity.y = _minJumpVelocity;
+			}
+		}
+
+		public void OnDescendInputDown()
+		{
+			if (!_controller.collisions.below && _velocity.y < 0 && !_isAscending)
+			{
+				_isDescending = true;
+				_gravity = _descendGravity;
 			}
 		}
 		
-
+		public void OnDescendInputUp()
+		{
+			if (_isDescending && !_isAscending)
+			{
+				_isDescending = false;
+				_gravity = _normalGravity;
+			}
+		}
+		
 		private void HandleWallSliding() {
-			wallDirX = (controller.collisions.left) ? -1 : 1;
-			wallSliding = false;
-			if ((controller.collisions.left || controller.collisions.right) && !controller.collisions.below && velocity.y < 0) {
-				wallSliding = true;
+			_wallDirX = (_controller.collisions.left) ? -1 : 1;
+			_wallSliding = false;
+			if ((_controller.collisions.left || _controller.collisions.right) && !_controller.collisions.below && _velocity.y < 0) {
+				_wallSliding = true;
 
-				if (velocity.y < -wallSlideSpeedMax) {
-					velocity.y = -wallSlideSpeedMax;
+				if (_velocity.y < -_wallSlideSpeedMax) {
+					_velocity.y = -_wallSlideSpeedMax;
 				}
 
-				if (timeToWallUnstick > 0) {
-					velocityXSmoothing = 0;
-					velocity.x = 0;
+				if (_timeToWallUnstick > 0) {
+					_velocityXSmoothing = 0;
+					_velocity.x = 0;
 
-					if (directionalInput.x != wallDirX && directionalInput.x != 0) {
-						timeToWallUnstick -= Time.deltaTime;
+					if (_directionalInput.x != _wallDirX && _directionalInput.x != 0) {
+						_timeToWallUnstick -= Time.deltaTime;
 					}
 					else {
-						timeToWallUnstick = wallStickTime;
+						_timeToWallUnstick = _wallStickTime;
 					}
 				}
 				else {
-					timeToWallUnstick = wallStickTime;
+					_timeToWallUnstick = _wallStickTime;
 				}
-
 			}
-
 		}
 
 		private void CalculateVelocity() {
-			float targetVelocityX = directionalInput.x * moveSpeed;
-			velocity.x = Mathf.SmoothDamp (velocity.x, targetVelocityX, ref velocityXSmoothing, 
-				(controller.collisions.below)?accelerationTimeGrounded:accelerationTimeAirborne);
-			velocity.y += gravity * Time.deltaTime;
+			float targetVelocityX = _directionalInput.x * _moveSpeed;
+			_velocity.x = Mathf.SmoothDamp (_velocity.x, targetVelocityX, ref _velocityXSmoothing, 
+				(_controller.collisions.below)?_accelerationTimeGrounded:_accelerationTimeAirborne);
+			_velocity.y += _gravity * Time.deltaTime;
 		}
 
+		private void OnPlayerExitedAscend()
+		{
+			_isAscending = false;
+			_gravity = _normalGravity;
+		}
+
+		private void OnPlayerEnteredAscend()
+		{
+			_isAscending = true;
+			_gravity = _ascendGravity;
+		}
+		
 		public void OnFootStep() => OnPlayerFootStep?.Invoke();
 	}
 }

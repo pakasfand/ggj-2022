@@ -15,11 +15,21 @@ namespace Player
 			Vector2 directionalInput = new Vector2 (Input.GetAxisRaw ("Horizontal"), Input.GetAxisRaw ("Vertical"));
 			player.SetDirectionalInput (directionalInput);
 
-			if (Input.GetKeyDown (KeyCode.Space)) {
+			if (Input.GetKeyDown (KeyCode.Space))
+			{
 				player.OnJumpInputDown ();
 			}
-			if (Input.GetKeyUp (KeyCode.Space)) {
+			if (Input.GetKeyUp (KeyCode.Space))
+			{
 				player.OnJumpInputUp ();
+			}
+			if (Input.GetKey(KeyCode.E))
+			{
+				player.OnDescendInputDown();
+			}
+			if (Input.GetKeyUp(KeyCode.E))
+			{
+				player.OnDescendInputUp();
 			}
 		}
 	}
