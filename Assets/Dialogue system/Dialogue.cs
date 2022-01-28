@@ -1,13 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-[System.Serializable]
 
-public class Dialogue
+[System.Serializable]
+public struct Sentence
 {
-    public string name;
-    [TextArea(3, 10)] public string[] sentences;
-    public Font font;
-    public Sprite sprite;
-    public AudioClip[] speakNoises = new AudioClip[0];
+    public Character character;
+    public string text;
+}
+
+[CreateAssetMenu(fileName = "New Dialogue", menuName = "DialogueSystem/Dialogue")]
+public class Dialogue : ScriptableObject
+{
+    public Sentence[] sentences;
 }
