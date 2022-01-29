@@ -19,17 +19,18 @@ namespace Misc
 
     public class Snapshot
     {
-        public struct Transform
+        public struct GenericSerializedData
         {
             public Vector3 position;
             public Vector3 localScale;
             public Quaternion rotation;
+            public bool isActive;
         }
 
         public class ObjectSnapshot
         {
             private readonly Dictionary<Type, Dictionary<FieldInfo, object>> fieldSnapshots = new Dictionary<Type, Dictionary<FieldInfo, object>>();
-            public Transform transform { get; set; }
+            public GenericSerializedData genericSerializedData { get; set; }
 
             public void AddField(Type type, FieldInfo field, object value)
             {
@@ -92,11 +93,12 @@ namespace Misc
                 var objTransform = obj.transform;
                 var objectSnapshot = new Snapshot.ObjectSnapshot
                 {
-                    transform = new Snapshot.Transform()
+                    genericSerializedData = new Snapshot.GenericSerializedData()
                     {
                         position = objTransform.position,
                         rotation = objTransform.rotation,
-                        localScale = objTransform.localScale
+                        localScale = objTransform.localScale,
+                        isActive = obj.activeSelf
                     }
                 };
                 foreach (var (type, fields) in toSerialize.Select(kv => (kv.Key, kv.Value)))
@@ -129,9 +131,10 @@ namespace Misc
             {
                 var objTransform = obj.transform;
                 var objectSnapshot = snapshot[obj];
-                objTransform.position = objectSnapshot.transform.position;
-                objTransform.rotation = objectSnapshot.transform.rotation;
-                objTransform.localScale = objectSnapshot.transform.localScale;
+                objTransform.position = objectSnapshot.genericSerializedData.position;
+                objTransform.rotation = objectSnapshot.genericSerializedData.rotation;
+                objTransform.localScale = objectSnapshot.genericSerializedData.localScale;
+                obj.SetActive(objectSnapshot.genericSerializedData.isActive);
 
                 foreach (var (type, fields) in toSerialize.Select(kv => (kv.Key, kv.Value)))
                 {
@@ -156,22 +159,23 @@ namespace Misc
 
         public void PopSnapshot()
         {
-            if (!timeline.TryPop(out _))
+            if (timeline.Count == 0)
             {
                 print("Pop failed");
             }
+
+            timeline.Pop();
         }
 
         public void Rollback()
         {
-            Snapshot result;
-            if (!timeline.TryPeek(out result))
+            if (timeline.Count == 0)
             {
                 print("Rollback failed");
                 return;
             }
             
-            RestoreSnapshot(result);
+            RestoreSnapshot(timeline.Peek());
         }
     }
 }
