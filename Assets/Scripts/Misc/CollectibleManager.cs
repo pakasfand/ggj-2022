@@ -91,7 +91,7 @@ namespace Misc
 
         private void Update()
         {
-            print($"Mechanical: {mechanicalStartAmount}, Nature: {natureStartAmount}");
+            // print($"Mechanical: {mechanicalStartAmount}, Nature: {natureStartAmount}");
         }
     }
 }
