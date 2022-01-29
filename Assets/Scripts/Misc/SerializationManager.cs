@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using JetBrains.Annotations;
 using UnityEngine;
 
 namespace Misc
@@ -49,9 +50,9 @@ namespace Misc
 
         private readonly Dictionary<int, ObjectSnapshot> snapshots = new Dictionary<int, ObjectSnapshot>();
 
-        public ObjectSnapshot this[GameObject obj]
+        [CanBeNull] public ObjectSnapshot this[GameObject obj]
         {
-            get => snapshots[obj.GetInstanceID()];
+            get => snapshots.ContainsKey(obj.GetInstanceID()) ? snapshots[obj.GetInstanceID()] : null;
             set => snapshots[obj.GetInstanceID()] = value;
         }
     }
@@ -131,6 +132,11 @@ namespace Misc
             {
                 var objTransform = obj.transform;
                 var objectSnapshot = snapshot[obj];
+                if (objectSnapshot == null)
+                {
+                    continue;
+                }
+                
                 objTransform.position = objectSnapshot.genericSerializedData.position;
                 objTransform.rotation = objectSnapshot.genericSerializedData.rotation;
                 objTransform.localScale = objectSnapshot.genericSerializedData.localScale;
