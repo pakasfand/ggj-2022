@@ -162,6 +162,7 @@ namespace Misc
             if (timeline.Count == 0)
             {
                 print("Pop failed");
+                return;
             }
 
             timeline.Pop();
