@@ -21,11 +21,13 @@ namespace Misc
             if (obj.GetComponent<Collectible>().type == CollectibleType.NATURE)
             {
                 naturePreCheckpointStack.Push(obj);
+                
             }
             else
             {
                 mechanicalPostCheckpointStack.Push(obj);
             }
+            obj.SetActive(false);
         }
 
         public void PushPostCheckpoint()
@@ -44,6 +46,16 @@ namespace Misc
                 mechanicalPostCheckpointStack = mechanicalPostCheckpointStack.Push(tmp);
             }
             
+        }
+
+        public int GetMechanicalAmount()
+        {
+            return mechanicalPostCheckpointStack.Count;
+        }
+        
+        public int GetNatureAmount()
+        {
+            return mechanicalPostCheckpointStack.Count;
         }
 
         private void Awake()

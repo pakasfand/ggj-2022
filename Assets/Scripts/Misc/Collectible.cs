@@ -15,6 +15,9 @@ namespace Misc
         // Update is called once per frame
         private void OnTriggerEnter(Collider other)
         {
+            
+            CollectibleManager.instance.PushPreCheckpoint(this.gameObject);
+            
         }
     }
 }
