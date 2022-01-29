@@ -87,7 +87,7 @@ namespace Misc
         {
             var snapshot = new Snapshot();
 
-            var objects = FindObjectsOfType<GameObject>();
+            var objects = Resources.FindObjectsOfTypeAll<GameObject>();
             foreach (var obj in objects)
             {
                 var objTransform = obj.transform;
@@ -126,7 +126,7 @@ namespace Misc
         /// </summary>
         private void RestoreSnapshot(Snapshot snapshot)
         {
-            var objects = FindObjectsOfType<GameObject>();
+            var objects = Resources.FindObjectsOfTypeAll<GameObject>();
             foreach (var obj in objects)
             {
                 var objTransform = obj.transform;
