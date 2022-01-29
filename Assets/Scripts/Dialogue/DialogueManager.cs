@@ -1,97 +1,116 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DialogueManager : MonoBehaviour
+namespace Dialogue
 {
-
-    private Queue<string> NameText;
-    private Queue <string> sentences;
-    private Queue <Font> NameFont;
-    private Queue <Font> DialogueFont;
-    private Queue <Sprite> portraits;
-
-    [SerializeField] Text InterfaceNameText;
-    [SerializeField] Text InterfaceDialogueText;
-    [SerializeField] Image Interfaceportrait;
-
-    [SerializeField] float TypingSpeed;
-    [SerializeField] float TimeUntilTextAppears;
-
-    [SerializeField] Animator anim;
-
-    // Start is called before the first frame update
-    void Start()
+    public class DialogueManager : MonoBehaviour
     {
-        NameText = new Queue<string>();
-        sentences = new Queue<string>();
-        NameFont = new Queue<Font>();
-        DialogueFont = new Queue<Font>();
-        portraits = new Queue<Sprite>();
-        anim.updateMode = AnimatorUpdateMode.UnscaledTime;
+        [SerializeField] private TextMeshProUGUI _interfaceNameText;
+        [SerializeField] private TextMeshProUGUI _interfaceDialogueText;
+        [SerializeField] Image Interfaceportrait;
+        [SerializeField] Animator anim;
+        [SerializeField] float TypingSpeed;
+        [SerializeField] float TimeUntilTextAppears;
+
+        private Queue<string> NameText;
+        private Queue <string> sentences;
+        private Queue <TMP_FontAsset> NameFont;
+        private Queue <TMP_FontAsset> DialogueFont;
+        private Queue <Sprite> portraits;
+
+        public static Action OnDialogueEnded;
+
+        private void OnEnable()
+        {
+            DialogueTrigger.OnDialogueTriggered += OnDialogueTriggered;
+        }
+
+        private void OnDisable()
+        {
+            DialogueTrigger.OnDialogueTriggered -= OnDialogueTriggered;
+        }
+
+        void Start()
+        {
+            NameText = new Queue<string>();
+            sentences = new Queue<string>();
+            NameFont = new Queue<TMP_FontAsset>();
+            DialogueFont = new Queue<TMP_FontAsset>();
+            portraits = new Queue<Sprite>();
+            anim.updateMode = AnimatorUpdateMode.UnscaledTime;
+        }
+
+        public void StartDialogue(DialogueInstance _dialogueInstance)
+        {
+            // Time.timeScale = 0;
+
+            anim.SetBool("isOpen", true);
+
+            // Debug.Log("Starting dialogue of: " + dialogue.name);
+
+            StartCoroutine(CheckAnimationCompeted(_dialogueInstance));
+        }
+    
+        public void DisplayNextSentence()
+        {
+            if(sentences.Count == 0)
+            {
+                EndDialogue();
+                return;
+            }
+            
+            string sentence = sentences.Dequeue();
+            StopAllCoroutines();
+
+            _interfaceNameText.text = NameText.Dequeue();
+            _interfaceNameText.font = NameFont.Dequeue();
+            _interfaceDialogueText.font = DialogueFont.Dequeue();
+            Interfaceportrait.sprite = portraits.Dequeue();
         
-    }
-
-    public void StartDialogue(Dialogue dialogue)
-
-    {
-        Time.timeScale = 0;
-
-        anim.SetBool("isOpen", true);
-
-        Debug.Log("Starting dialogue of: " + dialogue.name);
-
-        StartCoroutine(CheckAnimationCompeted(dialogue));
-    }
-    public void DisplayNextSentence()
-    {
-        if(sentences.Count == 0)
-        {
-            EndDialogue();
-            return;
+            StartCoroutine(TypeSentence(sentence));
+            // Debug.Log(sentence);
         }
-        string sentence = sentences.Dequeue();
-        StopAllCoroutines();
-        InterfaceNameText.text = NameText.Dequeue();
-        InterfaceNameText.font = NameFont.Dequeue();
-        InterfaceDialogueText.font = DialogueFont.Dequeue();
-        Interfaceportrait.sprite = portraits.Dequeue();
-        StartCoroutine(TypeSentence(sentence));
-        Debug.Log(sentence);
-    }
 
-    private IEnumerator CheckAnimationCompeted(Dialogue dialogue)
-    {
-        yield return new WaitForSecondsRealtime(TimeUntilTextAppears);
-        sentences.Clear();
-        foreach (Sentence sentence in dialogue.sentences)
+        private IEnumerator CheckAnimationCompeted(DialogueInstance _dialogueInstance)
         {
-            sentences.Enqueue(sentence.text);
-            NameText.Enqueue(sentence.character.CharacterName);
-            NameFont.Enqueue(sentence.character.font);
-            DialogueFont.Enqueue(sentence.character.font);
-            portraits.Enqueue(sentence.character.portrait);
+            yield return new WaitForSecondsRealtime(TimeUntilTextAppears);
+            sentences.Clear();
+            foreach (Sentence sentence in _dialogueInstance.sentences)
+            {
+                sentences.Enqueue(sentence.text);
+                NameText.Enqueue(sentence.character.CharacterName);
+                NameFont.Enqueue(sentence.character.font);
+                DialogueFont.Enqueue(sentence.character.font);
+                portraits.Enqueue(sentence.character.portrait);
+            }
+            DisplayNextSentence();
         }
-        DisplayNextSentence();
-    }
 
-    private IEnumerator TypeSentence (string sentence)
-    {
-        InterfaceDialogueText.text = "";
-        foreach(char letter in sentence.ToCharArray())
+        private IEnumerator TypeSentence (string sentence)
         {
-            InterfaceDialogueText.text += letter;
-            yield return new WaitForSecondsRealtime(TypingSpeed);
+            _interfaceDialogueText.text = "";
+            foreach(char letter in sentence.ToCharArray())
+            {
+                _interfaceDialogueText.text += letter;
+                yield return new WaitForSecondsRealtime(TypingSpeed);
+            }
         }
-    }
 
-    void EndDialogue()
-    {
-        anim.SetBool("isOpen", false);
-        InterfaceDialogueText.text = "";
-        InterfaceNameText.text = "";
-        Time.timeScale = 1;
-        Debug.Log("End of Conversation");
+        private void EndDialogue()
+        {
+            OnDialogueEnded?.Invoke();
+            anim.SetBool("isOpen", false);
+            _interfaceDialogueText.text = "";
+            _interfaceNameText.text = "";
+            // Time.timeScale = 1;
+            // Debug.Log("End of Conversation");
+        }
+        
+        private void OnDialogueTriggered(DialogueInstance _dialogueInstance) => 
+            StartDialogue(_dialogueInstance);
     }
 }
