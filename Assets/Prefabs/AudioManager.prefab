@@ -240,11 +240,8 @@ MonoBehaviour:
   _musicSource: {fileID: 6163459911547369097}
   _sfxSource: {fileID: 6163459911547369100}
   _footSteps:
-  - {fileID: 8300000, guid: 0d26c02e34d12c24b9c9abd6834dd106, type: 3}
-  - {fileID: 8300000, guid: c48d5f24c9b6a7c46be7fb51db633855, type: 3}
-  - {fileID: 8300000, guid: 5d6f8af1a0967cd4cb923555807e1fdd, type: 3}
-  - {fileID: 8300000, guid: 48c32a9dee62d7e449daca2e392cab4f, type: 3}
-  - {fileID: 8300000, guid: 0a5ac02067af5b34a83759e9b9f03208, type: 3}
-  - {fileID: 8300000, guid: 17a65cf60c3177e4690809456c4a392f, type: 3}
-  - {fileID: 8300000, guid: 8f3c54bd1c570dd43abaa5dfcd22f9e9, type: 3}
-  _jumpSfx: {fileID: 8300000, guid: 6db5d9c9893eb454f9aa7fda484ef709, type: 3}
+  - {fileID: 8300000, guid: f999a9555f6ba2a4f9b2cf3f44b0ca09, type: 3}
+  - {fileID: 8300000, guid: ec238fcc82e15dc46a8dd99c1aabae73, type: 3}
+  - {fileID: 8300000, guid: 62ff65cc4787cf544b2c5646f521d86c, type: 3}
+  - {fileID: 8300000, guid: d59c3fe1291ecb94ba0374106f1173c5, type: 3}
+  _jumpSfx: {fileID: 8300000, guid: afda80e5279fb3d44926a216592685a0, type: 3}

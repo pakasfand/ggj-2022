@@ -7,13 +7,15 @@ namespace Player
 	[RequireComponent (typeof (Controller2D))]
 	public class PlayerController : MonoBehaviour
 	{
+		[Header("Walking")]
+		[SerializeField] private float _moveSpeed;
+		
 		[Header("Jumping")]
 		[SerializeField] private float _maxJumpHeight = 4;
 		[SerializeField] private float _minJumpHeight = 1;
 		[SerializeField] private float _timeToJumpApex = .4f;
 		private float _accelerationTimeAirborne = .2f;
 		private float _accelerationTimeGrounded = .1f;
-		private float _moveSpeed = 6;
 		private float _gravity;
 		private float _normalGravity;
 		private float _maxJumpVelocity;
