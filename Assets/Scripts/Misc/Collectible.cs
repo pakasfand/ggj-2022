@@ -15,9 +15,18 @@ namespace Misc
         // Update is called once per frame
         private void OnCollisionEnter2D(Collision2D other)
         {
-            //if layer==player
-            CollectibleManager.instance.PushPreCheckpoint(gameObject);
-            
+            switch (type)
+            {
+                case CollectibleType.MECHANICAL:
+                    CollectibleManager.instance.IncrementMechanical();        
+                    break;
+                case CollectibleType.NATURE:
+                    CollectibleManager.instance.IncrementNature();
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+            gameObject.SetActive(false);
         }
     }
 }
