@@ -58,10 +58,12 @@ namespace Misc
     public class SerializationManager : Singleton<SerializationManager>
     {
         private Dictionary<Type, List<FieldInfo>> toSerialize;
+        private Stack<Snapshot> timeline;
 
-        private void Start()
+        private void Awake()
         {
             toSerialize = new Dictionary<Type, List<FieldInfo>>();
+            timeline = new Stack<Snapshot>();
 
             // get all classes to serialize
             var serializableTypes = AppDomain.CurrentDomain
@@ -80,11 +82,11 @@ namespace Misc
             }
         }
 
-        public Snapshot TakeSnapshot()
+        private Snapshot TakeSnapshot()
         {
             var snapshot = new Snapshot();
 
-            var objects = GameObject.FindGameObjectsWithTag("Player");
+            var objects = FindObjectsOfType<GameObject>();
             foreach (var obj in objects)
             {
                 var objTransform = obj.transform;
@@ -120,9 +122,9 @@ namespace Misc
         /// <summary>
         /// Does not revive dead objects !
         /// </summary>
-        public void RestoreSnapshot(Snapshot snapshot)
+        private void RestoreSnapshot(Snapshot snapshot)
         {
-            var objects = GameObject.FindGameObjectsWithTag("Player");
+            var objects = FindObjectsOfType<GameObject>();
             foreach (var obj in objects)
             {
                 var objTransform = obj.transform;
@@ -145,6 +147,31 @@ namespace Misc
                     }
                 }
             }
+        }
+
+        public void CreateSnapshot()
+        {
+            timeline.Push(TakeSnapshot());
+        }
+
+        public void PopSnapshot()
+        {
+            if (!timeline.TryPop(out _))
+            {
+                print("Pop failed");
+            }
+        }
+
+        public void Rollback()
+        {
+            Snapshot result;
+            if (!timeline.TryPeek(out result))
+            {
+                print("Rollback failed");
+                return;
+            }
+            
+            RestoreSnapshot(result);
         }
     }
 }
