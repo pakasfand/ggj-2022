@@ -13,10 +13,10 @@ namespace Misc
 
 
         // Update is called once per frame
-        private void OnTriggerEnter(Collider other)
+        private void OnCollisionEnter2D(Collision2D other)
         {
-            
-            CollectibleManager.instance.PushPreCheckpoint(this.gameObject);
+            //if layer==player
+            CollectibleManager.instance.PushPreCheckpoint(gameObject);
             
         }
     }

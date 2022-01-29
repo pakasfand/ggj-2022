@@ -25,7 +25,7 @@ namespace Misc
             }
             else
             {
-                mechanicalPostCheckpointStack.Push(obj);
+                mechanicalPreCheckpointStack.Push(obj);
             }
             obj.SetActive(false);
         }
@@ -61,6 +61,11 @@ namespace Misc
         private void Awake()
         {
             DontDestroyOnLoad(gameObject);
+            mechanicalPreCheckpointStack = new ImmutableStack<GameObject>();
+            naturePreCheckpointStack = new ImmutableStack<GameObject>();
+            
+            mechanicalPostCheckpointStack = new ImmutableStack<GameObject>();
+            naturePostCheckpointStack = new ImmutableStack<GameObject>();
         }
     }
 }

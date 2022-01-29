@@ -7,12 +7,12 @@ namespace Misc
     {
         private readonly Stack<T> internalStack;
 
-        private ImmutableStack()
+        public ImmutableStack()
         {
             internalStack = new Stack<T>();
         }
 
-        private ImmutableStack(Stack<T> stack)
+        public ImmutableStack(Stack<T> stack)
         {
             internalStack = stack;
         }
