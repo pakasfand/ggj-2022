@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6e6d8660113e8264a8c41f566abe1bf5, type: 3}
-  m_Name: New Dialogue
+  m_Name: Test Dialogue
   m_EditorClassIdentifier: 
   sentences:
   - character: {fileID: 11400000, guid: 815d855af91d92c4cbd11996bbafbbfd, type: 2}
