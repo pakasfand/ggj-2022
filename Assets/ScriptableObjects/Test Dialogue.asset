@@ -15,7 +15,7 @@ MonoBehaviour:
   sentences:
   - character: {fileID: 11400000, guid: 815d855af91d92c4cbd11996bbafbbfd, type: 2}
     text: asdddddddd
-  - character: {fileID: 11400000, guid: 815d855af91d92c4cbd11996bbafbbfd, type: 2}
+  - character: {fileID: 11400000, guid: c94c1181689513f45b4c56b99db3fc15, type: 2}
     text: aaaaaaaaaaaa
   - character: {fileID: 11400000, guid: 815d855af91d92c4cbd11996bbafbbfd, type: 2}
     text: fffffffffffffffffff
