@@ -68,8 +68,11 @@ namespace Player
 			}
 		}
 
-		private void OnDialogueTriggered(DialogueInstance _dialogueInstance) =>
+		private void OnDialogueTriggered(DialogueInstance _dialogueInstance)
+		{
+			player.SetDirectionalInput(Vector2.zero);
 			_enabled = false;
+		}
 
 		private void OnDialogueEnded() => _enabled = true;
 	}

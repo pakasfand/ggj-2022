@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b984b1442473cb74ea5e5eac8723cbb6, type: 3}
   m_Name: Abdo
   m_EditorClassIdentifier: 
-  CharacterName: Abdo
+  CharacterName: 
   font: {fileID: 11400000, guid: f5fdb7324d868ff4a895fad5021538c8, type: 2}
   voices: []
   portrait: {fileID: 21300000, guid: 9b1f7577da5402d40b045b51857d28a4, type: 3}

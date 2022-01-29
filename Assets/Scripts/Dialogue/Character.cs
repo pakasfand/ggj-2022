@@ -6,6 +6,7 @@ namespace Dialogue
     [CreateAssetMenu(fileName = "New Character", menuName = "DialogueSystem/Character")]
     public class Character : ScriptableObject
     {
+        public DialogueCharacterType DialogueCharacterType;
         public string CharacterName;
         public TMP_FontAsset font;
         public AudioClip[] voices;

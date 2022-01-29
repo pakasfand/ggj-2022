@@ -14,8 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sentences:
   - character: {fileID: 11400000, guid: 815d855af91d92c4cbd11996bbafbbfd, type: 2}
-    text: asdddddddd
+    text: Hey, you. You're finally awake. You were trying to cross the border, right?
+      Walked right into that Imperial ambush, same as us, and that thief over there.
   - character: {fileID: 11400000, guid: c94c1181689513f45b4c56b99db3fc15, type: 2}
-    text: aaaaaaaaaaaa
+    text: Damn you Stormcloaks. Skyrim was fine until you came along. Empire was
+      nice and lazy. If they hadn't been looking for you, I could've stolen that
+      horse and been half way to Hammerfell.
   - character: {fileID: 11400000, guid: 815d855af91d92c4cbd11996bbafbbfd, type: 2}
-    text: fffffffffffffffffff
+    text: We're all brothers and sisters in binds now, thief.
