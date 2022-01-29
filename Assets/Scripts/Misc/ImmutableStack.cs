@@ -17,17 +17,17 @@ namespace Misc
             internalStack = stack;
         }
 
-        public ImmutableStack<T> Add(T t)
+        public ImmutableStack<T> Push(T t)
         {
             var newStack = internalStack.Clone();
             newStack.Push(t);
             return new ImmutableStack<T>(newStack);
         }
-        
-        public ImmutableStack<T> Pop(T t)
+
+        public ImmutableStack<T> Pop(out T t)
         {
             var newStack = internalStack.Clone();
-            newStack.Push(t);
+            t = newStack.Pop();
             return new ImmutableStack<T>(newStack);
         }
 
@@ -35,6 +35,10 @@ namespace Misc
         {
             return internalStack.Peek();
         }
+
+        public int Count => internalStack.Count;
+
+        public bool IsEmpty => internalStack.Count == 0;
 
         public IEnumerator<T> GetEnumerator()
         {
@@ -46,7 +50,7 @@ namespace Misc
             return GetEnumerator();
         }
     }
-    
+
     public static class StackExt
     {
         public static Stack<T> Clone<T>(this Stack<T> s)
