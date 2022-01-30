@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e6d8660113e8264a8c41f566abe1bf5, type: 3}
+  m_Name: Halfway
+  m_EditorClassIdentifier: 
+  sentences:
+  - character: {fileID: 11400000, guid: c94c1181689513f45b4c56b99db3fc15, type: 2}
+    text: Looks like you were able to collect all the souls after all.
+  - character: {fileID: 11400000, guid: c94c1181689513f45b4c56b99db3fc15, type: 2}
+    text: Apologies about my outburst earlier. I was not in the right state of mind.
+  - character: {fileID: 11400000, guid: c94c1181689513f45b4c56b99db3fc15, type: 2}
+    text: 'My partner was able to figure out what went wrong with their experimentation
+      and apparently they used too many mechanical soul shards causing the soul stream
+      to destabilize. '
+  - character: {fileID: 11400000, guid: c94c1181689513f45b4c56b99db3fc15, type: 2}
+    text: 'Apparently, they used too many mechanical soul shards causing the soul
+      stream to destabilize. '
+  - character: {fileID: 11400000, guid: c94c1181689513f45b4c56b99db3fc15, type: 2}
+    text: "To restart the soul stream we\u2019ll need both mechanical and natural
+      soul shards."
+  - character: {fileID: 11400000, guid: c94c1181689513f45b4c56b99db3fc15, type: 2}
+    text: On your back can you find and collect any natural soul shards you might
+      come across?

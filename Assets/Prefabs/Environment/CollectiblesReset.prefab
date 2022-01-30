@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &7558950740134643614
+--- !u!1 &5826905278201895586
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,44 +8,44 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7558950740134643603}
-  - component: {fileID: 7558950740134643600}
-  - component: {fileID: 7558950740134643601}
+  - component: {fileID: 5826905278201895591}
+  - component: {fileID: 5826905278201895588}
+  - component: {fileID: 5826905278201895589}
   m_Layer: 0
-  m_Name: DialogueTrigger
+  m_Name: CollectiblesReset
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7558950740134643603
+--- !u!4 &5826905278201895591
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7558950740134643614}
+  m_GameObject: {fileID: 5826905278201895586}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 14.03, y: -2.06, z: 0}
-  m_LocalScale: {x: 13.858, y: 13.858, z: 13.858}
+  m_LocalPosition: {x: 1488.2, y: 156.4, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &7558950740134643600
+--- !u!61 &5826905278201895588
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7558950740134643614}
+  m_GameObject: {fileID: 5826905278201895586}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.16116285, y: 0.9869561}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -56,22 +56,23 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 14.055705, y: 14.641658}
   m_EdgeRadius: 0
---- !u!114 &7558950740134643601
+--- !u!114 &5826905278201895589
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7558950740134643614}
+  m_GameObject: {fileID: 5826905278201895586}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0cfa8615973248647b31489f46f52169, type: 3}
+  m_Script: {fileID: 11500000, guid: 605b9713f0f3fa141a862d546c869fb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dialogueInstance: {fileID: 11400000, guid: 51960c45cc6c1c84bb738414ceb03398, type: 2}
+  _reset:
+  - {fileID: 0}
+  - {fileID: 0}
   _collisionMask:
     serializedVersion: 2
     m_Bits: 64
-  _triggerOnce: 1
