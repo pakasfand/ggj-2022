@@ -84466,11 +84466,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3442341835911610112, guid: 88a9b0a54ef39884cace18f4b1617d75, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1486.7
+      value: -209.1
       objectReference: {fileID: 0}
     - target: {fileID: 3442341835911610112, guid: 88a9b0a54ef39884cace18f4b1617d75, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 183.51999
+      value: 19.22
       objectReference: {fileID: 0}
     - target: {fileID: 3442341835911610112, guid: 88a9b0a54ef39884cace18f4b1617d75, type: 3}
       propertyPath: m_LocalPosition.z
@@ -84592,11 +84592,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5103252236275739954, guid: 415863d470e540a46a6a86d384ea1fa0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1486.7
+      value: -209.1
       objectReference: {fileID: 0}
     - target: {fileID: 5103252236275739954, guid: 415863d470e540a46a6a86d384ea1fa0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 162.4
+      value: -1.9
       objectReference: {fileID: 0}
     - target: {fileID: 5103252236275739954, guid: 415863d470e540a46a6a86d384ea1fa0, type: 3}
       propertyPath: m_LocalPosition.z
@@ -84652,11 +84652,19 @@ PrefabInstance:
       value: CollectiblesReset
       objectReference: {fileID: 0}
     - target: {fileID: 5826905278201895589, guid: 83b5034de7043b94fb080bac352b952d, type: 3}
+      propertyPath: _reset.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5826905278201895589, guid: 83b5034de7043b94fb080bac352b952d, type: 3}
       propertyPath: _reset.Array.data[0]
       value: 
       objectReference: {fileID: 1123882079}
     - target: {fileID: 5826905278201895589, guid: 83b5034de7043b94fb080bac352b952d, type: 3}
       propertyPath: _reset.Array.data[1]
+      value: 
+      objectReference: {fileID: 1190126691}
+    - target: {fileID: 5826905278201895589, guid: 83b5034de7043b94fb080bac352b952d, type: 3}
+      propertyPath: _reset.Array.data[2]
       value: 
       objectReference: {fileID: 1190126691}
     - target: {fileID: 5826905278201895591, guid: 83b5034de7043b94fb080bac352b952d, type: 3}
@@ -84986,11 +84994,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8010277685700273614, guid: af5c96a36258fbb4293dea0e15f22b38, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1486.7
+      value: -209.1
       objectReference: {fileID: 0}
     - target: {fileID: 8010277685700273614, guid: af5c96a36258fbb4293dea0e15f22b38, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 183.51999
+      value: 19.22
       objectReference: {fileID: 0}
     - target: {fileID: 8010277685700273614, guid: af5c96a36258fbb4293dea0e15f22b38, type: 3}
       propertyPath: m_LocalPosition.z
