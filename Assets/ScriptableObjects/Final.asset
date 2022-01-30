@@ -12,4 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e6d8660113e8264a8c41f566abe1bf5, type: 3}
   m_Name: Final
   m_EditorClassIdentifier: 
-  sentences: []
+  sentences:
+  - character: {fileID: 11400000, guid: 815d855af91d92c4cbd11996bbafbbfd, type: 2}
+    text: "Fantastic work Little One! With your help we\u2019ll be able to get the
+      soul stream started up again."
+  - character: {fileID: 11400000, guid: c94c1181689513f45b4c56b99db3fc15, type: 2}
+    text: Now go on. You deserve a nice long vacation.
