@@ -284,6 +284,36 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4048601203757653696, guid: 9bb1cd9e6ef36d147bab4f090991a46f, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4048601203955376294, guid: 9bb1cd9e6ef36d147bab4f090991a46f, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -62
+      objectReference: {fileID: 0}
+    - target: {fileID: 4048601203972638834, guid: 9bb1cd9e6ef36d147bab4f090991a46f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4048601204139670122, guid: 9bb1cd9e6ef36d147bab4f090991a46f, type: 3}
+      propertyPath: m_text
+      value: 'Ezra (Music, Programmer)
+
+        Asfand (Programmer)
+
+        Anton
+        (Sound Design)
+
+        Abdo (Programmer)
+
+        Hongjun (Prohrammer)
+
+        Guillaume
+        (Artist)
+
+        Lola (Artist)'
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9bb1cd9e6ef36d147bab4f090991a46f, type: 3}
 --- !u!1001 &408265628
