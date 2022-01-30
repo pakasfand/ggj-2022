@@ -6,7 +6,8 @@ namespace Misc
     public class AscendZone : MonoBehaviour
     {
         [SerializeField] private LayerMask _collisionMask;
-        
+
+        public static Action OnPlayAscendSfx;
         public static Action OnPlayerEntered;
         public static Action OnPlayerExited;
 
@@ -14,6 +15,7 @@ namespace Misc
         {
             if (_collisionMask.Contains(col.gameObject.layer))
             {
+                OnPlayAscendSfx?.Invoke();
                 OnPlayerEntered?.Invoke();
             }
         }

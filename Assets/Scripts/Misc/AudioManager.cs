@@ -12,6 +12,7 @@ namespace Misc
         [SerializeField] private AudioSource _musicSource;
         [SerializeField] private AudioSource _sfxSource;
         [SerializeField] private AudioSource _dialogueSource;
+        [SerializeField] private AudioSource _ascendingSource;
 
         [Header("Footsteps")] 
         [SerializeField] private List<AudioClip> _footSteps;
@@ -22,6 +23,7 @@ namespace Misc
         
         [Header("Sounds Effects")]
         [SerializeField] private AudioClip _jumpSfx;
+        [SerializeField] private AudioClip _ascendingSfx;
 
         private int _voiceLineIndex;
         
@@ -44,7 +46,10 @@ namespace Misc
             PlayerController.OnPlayerFootStep += OnPlayerFootStep;
             DialogueManager.OnDialogueInstanceStarted += OnDialogueInstanceStarted;
             DialogueManager.OnDialogueInstanceEnded += OnDialogueInstanceEnded;
+            AscendZone.OnPlayAscendSfx += OnPlayAscendSfx;
+            AscendZone.OnPlayerExited -= OnPlayerExited;
         }
+
 
         private void OnDisable()
         {
@@ -52,6 +57,8 @@ namespace Misc
             PlayerController.OnPlayerFootStep -= OnPlayerFootStep;
             DialogueManager.OnDialogueInstanceStarted -= OnDialogueInstanceStarted;
             DialogueManager.OnDialogueInstanceEnded -= OnDialogueInstanceEnded;
+            AscendZone.OnPlayAscendSfx -= OnPlayAscendSfx;
+            AscendZone.OnPlayerExited  -= OnPlayerExited;
         }
 
         private void OnPlayerFootStep()
@@ -90,7 +97,18 @@ namespace Misc
                 }
             }
         }
+    
+        private void OnPlayAscendSfx()
+        {
+            _ascendingSource.PlayOneShot(_ascendingSfx);
+            // _ascendingSource.Play();
+        }
 
+        private void OnPlayerExited()
+        {
+            // _ascendingSource.Stop();
+        }
+        
         private void OnDialogueInstanceEnded()
         {
             StopCoroutine(nameof(CharacterSpeechLoop));
