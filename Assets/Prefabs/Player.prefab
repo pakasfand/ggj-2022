@@ -78,7 +78,7 @@ SpriteRenderer:
   m_SortingLayerID: 1808321831
   m_SortingLayer: 4
   m_SortingOrder: 3
-  m_Sprite: {fileID: 21300000, guid: 31e56cd9dffd0eb43a14e7ac1b4d1fc5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d53daa5528abb5a4288c7b68af296ac9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
@@ -170,7 +170,6 @@ MonoBehaviour:
   collisionMask:
     serializedVersion: 2
     m_Bits: 256
-  skinWidth: 0.015
   horizontalRayCount: 0
   verticalRayCount: 0
   horizontalRaySpacing: 0

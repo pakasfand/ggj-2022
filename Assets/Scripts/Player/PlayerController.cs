@@ -95,7 +95,10 @@ namespace Player
 
 		private void HandleRendering()
 		{
-			_spriteRenderer.flipX = _directionalInput.x < 0;
+			if (_directionalInput.x != 0)
+			{
+				_spriteRenderer.flipX = _directionalInput.x < 0;
+			}
 			if (_controller.collisions.below)
 			{
 				_animator.SetBool("isJumping", false);
