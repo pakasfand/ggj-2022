@@ -47,25 +47,6 @@ namespace Player
 			{
 				player.OnDescendInputDown();
 			}
-			if (Input.GetKeyUp(KeyCode.E))
-			{
-				player.OnDescendInputUp();
-			}
-
-			if (Input.GetKeyDown(KeyCode.C))
-			{
-				SerializationManager.instance.CreateSnapshot();
-			}
-
-			if (Input.GetKeyDown(KeyCode.Z))
-			{
-				SerializationManager.instance.Rollback();
-			}
-			
-			if (Input.GetKeyDown(KeyCode.X))
-			{
-				SerializationManager.instance.PopSnapshot();
-			}
 		}
 
 		private void OnDialogueTriggered(DialogueInstance _dialogueInstance)
