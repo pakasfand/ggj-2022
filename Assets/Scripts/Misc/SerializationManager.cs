@@ -130,6 +130,9 @@ namespace Misc
             var objects = Resources.FindObjectsOfTypeAll<GameObject>();
             foreach (var obj in objects)
             {
+                if (obj.GetComponent<SerializationIgnore>() != null)
+                    continue;
+                
                 var objTransform = obj.transform;
                 var objectSnapshot = snapshot[obj];
                 if (objectSnapshot == null)
