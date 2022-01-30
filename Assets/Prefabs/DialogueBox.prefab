@@ -34,7 +34,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 80, y: 57}
+  m_AnchoredPosition: {x: 193, y: 57}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6620023501761889133
@@ -128,7 +128,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -28.521759, w: -10.990898}
+  m_margin: {x: 0, y: 0, z: -1.0347366, w: -10.990898}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -279,6 +279,7 @@ GameObject:
   - component: {fileID: 8005544737087621743}
   - component: {fileID: 265046855092472540}
   - component: {fileID: 8819750983276542363}
+  - component: {fileID: 6535378815298388738}
   m_Layer: 5
   m_Name: PortraitImage
   m_TagString: Untagged
@@ -302,7 +303,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -684, y: 19}
+  m_AnchoredPosition: {x: -569, y: -16}
   m_SizeDelta: {x: 240.07, y: 238.1435}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &265046855092472540
@@ -343,6 +344,25 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!95 &6535378815298388738
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5378669899991322571}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0ecdf17c96479a54c8cc7de84f53b2bb, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &6063500105032026987
 GameObject:
   m_ObjectHideFlags: 0
@@ -606,6 +626,7 @@ MonoBehaviour:
   Interfaceportrait: {fileID: 8819750983276542363}
   _continueButton: {fileID: 6699482650647709047}
   anim: {fileID: 6580060319051272663}
+  _portraitAnim: {fileID: 6535378815298388738}
   TypingSpeed: 0.05
   TimeUntilTextAppears: 0.3
 --- !u!1 &6580060319051272667

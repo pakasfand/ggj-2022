@@ -70,7 +70,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cfa8615973248647b31489f46f52169, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dialogueInstance: {fileID: 11400000, guid: 2b153ef9620ff3141b9201a0e588bfc7, type: 2}
+  _dialogueInstance: {fileID: 11400000, guid: ed658bf8444746545af911fb903da9ca, type: 2}
   _collisionMask:
     serializedVersion: 2
     m_Bits: 64

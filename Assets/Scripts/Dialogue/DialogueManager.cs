@@ -14,6 +14,7 @@ namespace Dialogue
         [SerializeField] Image Interfaceportrait;
         [SerializeField] private GameObject _continueButton;
         [SerializeField] Animator anim;
+        [SerializeField] private Animator _portraitAnim;
         [SerializeField] float TypingSpeed;
         [SerializeField] float TimeUntilTextAppears;
 
@@ -104,6 +105,7 @@ namespace Dialogue
         {
             OnDialogueInstanceStarted?.Invoke(characterType);
             _interfaceDialogueText.text = "";
+            _portraitAnim.SetBool("isMechanical", characterType == DialogueCharacterType.Mechanical);
             foreach(char letter in sentence.ToCharArray())
             {
                 _interfaceDialogueText.text += letter;

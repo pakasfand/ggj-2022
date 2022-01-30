@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b984b1442473cb74ea5e5eac8723cbb6, type: 3}
-  m_Name: Abdo
+  m_Name: Natural
   m_EditorClassIdentifier: 
-  DialogueCharacterType: 0
+  DialogueCharacterType: 1
   CharacterName: 
-  font: {fileID: 11400000, guid: f5fdb7324d868ff4a895fad5021538c8, type: 2}
+  font: {fileID: 11400000, guid: 6b64196ff52b88b489cc6ead5800c7df, type: 2}
   voices: []
-  portrait: {fileID: 21300000, guid: eeb1c4854102af24ba4b0682aede00f6, type: 3}
+  portrait: {fileID: 21300000, guid: d71bf42322040d74bab092c90bbccdf5, type: 3}

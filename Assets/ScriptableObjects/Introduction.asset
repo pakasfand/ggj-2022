@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e6d8660113e8264a8c41f566abe1bf5, type: 3}
+  m_Name: Introduction
+  m_EditorClassIdentifier: 
+  sentences:
+  - character: {fileID: 11400000, guid: c94c1181689513f45b4c56b99db3fc15, type: 2}
+    text: You Idiot! You fool! Look what your experimentation did!
+  - character: {fileID: 11400000, guid: 815d855af91d92c4cbd11996bbafbbfd, type: 2}
+    text: "I\u2019m terribly sorry. Looks like my calculations were wrong. I\u2019ll
+      have to double check my math and locate the source of the error."
+  - character: {fileID: 11400000, guid: c94c1181689513f45b4c56b99db3fc15, type: 2}
+    text: How can you be so non-chalet about this! The soul stream is completely
+      disrupted! Our backlog of souls is larger than ever.
+  - character: {fileID: 11400000, guid: 815d855af91d92c4cbd11996bbafbbfd, type: 2}
+    text: "I\u2019m well aware of the predicament we\u2019re in. Our slow processing
+      of souls was exactly why I was experimenting and trying to increase our efficiency."
+  - character: {fileID: 11400000, guid: c94c1181689513f45b4c56b99db3fc15, type: 2}
+    text: "Well now we\u2019re even worse off than ever before. Had you simply..."
+  - character: {fileID: 11400000, guid: 815d855af91d92c4cbd11996bbafbbfd, type: 2}
+    text: Apologies for the interruption. But it seems like we have a visitor.
+  - character: {fileID: 11400000, guid: c94c1181689513f45b4c56b99db3fc15, type: 2}
+    text: "We\u2019re leaking souls! That\u2019s just fantastic."
+  - character: {fileID: 11400000, guid: 815d855af91d92c4cbd11996bbafbbfd, type: 2}
+    text: 'Patience. We can clearly do with some help right now. '
+  - character: {fileID: 11400000, guid: c94c1181689513f45b4c56b99db3fc15, type: 2}
+    text: 'Understatement of the millennia. '
+  - character: {fileID: 11400000, guid: 815d855af91d92c4cbd11996bbafbbfd, type: 2}
+    text: "Sorry little one, my partner here let\u2019s their emotion get the better
+      of them."
+  - character: {fileID: 11400000, guid: c94c1181689513f45b4c56b99db3fc15, type: 2}
+    text: Well at least I show some emotion!
+  - character: {fileID: 11400000, guid: 815d855af91d92c4cbd11996bbafbbfd, type: 2}
+    text: "Little one, you\u2019re stick here in the in between until I can get the
+      soul stream back up and running."
+  - character: {fileID: 11400000, guid: 815d855af91d92c4cbd11996bbafbbfd, type: 2}
+    text: "To do that I\u2019ll need you to collect soul shards that power the soul
+      stream."
